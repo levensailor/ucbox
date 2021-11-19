@@ -1,0 +1,4 @@
+include README.md
+include LICENSE
+recursive-include ucbox_plugin/templates *
+recursive-include ucbox_plugin/static *
