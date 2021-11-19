@@ -40,11 +40,11 @@ A sip trunk has a name, a region, and destination
 
 ### Plugin API
 
-The plugin introduces a NetBox REST API extension `/api/plugins/phonebox/`.<br/>
-It currently supports all create, read, update, and delete operations for Numbers via `/api/plugins/phonebox/numbers/`.<br/>
+The plugin introduces a NetBox REST API extension `/api/plugins/ucbox/`.<br/>
+It currently supports all create, read, update, and delete operations for Numbers via `/api/plugins/ucbox/numbers/`.<br/>
 The API is compatible with [pynetbox](https://github.com/digitalocean/pynetbox):
 ```
->>> nb.plugins.phonebox.numbers.get(7)
+>>> nb.plugins.ucbox.numbers.get(7)
 2000
 >>> 
 ```

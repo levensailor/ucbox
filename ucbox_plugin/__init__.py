@@ -1,14 +1,14 @@
 from extras.plugins import PluginConfig
 
 
-class PhoneBoxConfig(PluginConfig):
+class UCBoxConfig(PluginConfig):
     name = 'ucbox_plugin'
-    verbose_name = 'PhoneBox Plugin'
-    description = 'Telephone Number Management Plugin for NetBox.'
-    version = 'v0.0.2-beta.3'
-    author = 'Igor Korotchenkov'
-    author_email = 'iDebugAll@gmail.com'
-    base_url = 'phonebox'
+    verbose_name = 'UCBox Plugin'
+    description = 'Unified Communications Management Plugin for NetBox.'
+    version = 'v0.0.1'
+    author = 'Jeff Levensailor'
+    author_email = 'jeff@levensailor.com'
+    base_url = 'ucbox'
     min_version = "2.11.0"
     required_settings = []
     default_settings = {}
@@ -16,4 +16,4 @@ class PhoneBoxConfig(PluginConfig):
         '*': None
     }
 
-config = PhoneBoxConfig
+config = UCBoxConfig

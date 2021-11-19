@@ -1,1 +1,1 @@
-"""REST API for PhoneBox Plugin"""
+"""REST API for UCBox Plugin"""
