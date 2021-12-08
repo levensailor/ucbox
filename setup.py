@@ -7,7 +7,7 @@ with open(path.join(top_level_directory, 'README.md'), encoding='utf-8') as file
 
 setup(
     name='ucbox_plugin',
-    version='v0.0.1',
+    version='v0.0.22',
     url='https://github.com/levensailor/ucbox.git',
     description='A unified communications management plugin for NetBox.',
     long_description=long_description,

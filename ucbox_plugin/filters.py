@@ -3,7 +3,7 @@ from django.db.models import Q
 from circuits.models import Provider
 from dcim.models import Region
 from tenancy.models import Tenant
-from .models import Number, Trunk
+from .models import Number, Trunk, UCCluster, DevicePool
 from packaging import version
 from django.conf import settings
 
@@ -74,7 +74,7 @@ class TrunkFilterSet(BaseFilterSet):
         method='search',
         label='Search',
     )
-    number = django_filters.ModelMultipleChoiceFilter(
+    trunk = django_filters.ModelMultipleChoiceFilter(
         field_name='trunk',
         queryset=Trunk.objects.all(),
         to_field_name='trunk',
@@ -98,12 +98,6 @@ class TrunkFilterSet(BaseFilterSet):
         to_field_name='id',
         label='Region (id)',
     )
-    destination = django_filters.ModelMultipleChoiceFilter(
-        field_name='destination',
-        queryset=Trunk.objects.all(),
-        to_field_name='destination',
-        label='destination',
-    )
     tag = TagFilter()
 
     class Meta():
@@ -115,4 +109,74 @@ class TrunkFilterSet(BaseFilterSet):
             return queryset
         return queryset.filter(
             Q(trunk__icontains=value)
+        )
+
+
+class UCClusterFilterSet(BaseFilterSet):
+
+    q = django_filters.CharFilter(
+        method='search',
+        label='Search',
+    )
+    uccluster = django_filters.ModelMultipleChoiceFilter(
+        field_name='uccluster',
+        queryset=UCCluster.objects.all(),
+        to_field_name='uccluster',
+        label='uccluster',
+    )
+    tenant = django_filters.ModelMultipleChoiceFilter(
+        queryset=Tenant.objects.all(),
+        field_name='tenant__id',
+        to_field_name='id',
+        label='Tenant (id)',
+    )
+    tag = TagFilter()
+
+    class Meta():
+        model = UCCluster
+        fields = ('uccluster',)
+
+    def search(self, queryset, uccluster, value):
+        if not value.strip():
+            return queryset
+        return queryset.filter(
+            Q(uccluster__icontains=value)
+        )
+
+
+class DevicePoolFilterSet(BaseFilterSet):
+
+    q = django_filters.CharFilter(
+        method='search',
+        label='Search',
+    )
+    devicepool = django_filters.ModelMultipleChoiceFilter(
+        field_name='devicepool',
+        queryset=DevicePool.objects.all(),
+        to_field_name='devicepool',
+        label='devicepool',
+    )
+    tenant = django_filters.ModelMultipleChoiceFilter(
+        queryset=Tenant.objects.all(),
+        field_name='tenant__id',
+        to_field_name='id',
+        label='Tenant (id)',
+    )
+    region = django_filters.ModelMultipleChoiceFilter(
+        queryset=Region.objects.all(),
+        field_name='region__id',
+        to_field_name='id',
+        label='Region (id)',
+    )
+    tag = TagFilter()
+
+    class Meta():
+        model = DevicePool
+        fields = ('devicepool',)
+
+    def search(self, queryset, devicepool, value):
+        if not value.strip():
+            return queryset
+        return queryset.filter(
+            Q(devicepool__icontains=value)
         )

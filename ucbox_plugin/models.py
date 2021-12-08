@@ -27,14 +27,14 @@ class Trunk(ChangeLoggedModel):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="provider_set"
+        related_name="trunk_provider_set"
     )
     region = models.ForeignKey(
         to="dcim.Region",
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="region_set"
+        related_name="trunk_region_set"
     )
     objects = RestrictedQuerySet.as_manager()
 
@@ -78,14 +78,14 @@ class Number(ChangeLoggedModel):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="provider_set"
+        related_name="number_provider_set"
     )
     region = models.ForeignKey(
         to="dcim.Region",
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="region_set"
+        related_name="number_region_set"
     )
     forward_to = models.ForeignKey(
         to="self",
@@ -108,3 +108,70 @@ class Number(ChangeLoggedModel):
 
     class Meta:
         unique_together = ("number", "tenant",)#ermoe enant here
+
+
+class UCCluster(ChangeLoggedModel):
+    uccluster = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    tags = TaggableManager(through=TaggedItem)
+    tenant = models.ForeignKey(
+        to='tenancy.Tenant',
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False
+    )
+    publisher = models.CharField(max_length=200)
+    subscriber1 = models.CharField(max_length=200)
+    subscriber2 = models.CharField(max_length=200)
+    subscriber3 = models.CharField(max_length=200)
+    subscriber4 = models.CharField(max_length=200)
+    tftp1 = models.CharField(max_length=200)
+    tftp2 = models.CharField(max_length=200)
+
+    objects = RestrictedQuerySet.as_manager()
+
+    csv_headers = ['uccluster', 'tenant', 'description', 'publisher', 'subscriber1', 'subscriber2', 'subscriber3', 'subscriber4', 'tftp1', 'tftp2']
+
+    def __str__(self):
+        return str(self.uccluster)
+
+    def get_absolute_url(self):
+        return reverse("plugins:ucbox_plugin:uccluster_view", kwargs={"pk": self.pk})
+
+    class Meta:
+        unique_together = ("uccluster", "tenant",)#ermoe enant here
+
+
+
+class DevicePool(ChangeLoggedModel):
+    devicepool = models.CharField(max_length=200)
+    description = models.CharField(max_length=200)
+    tags = TaggableManager(through=TaggedItem)
+    tenant = models.ForeignKey(
+        to='tenancy.Tenant',
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False
+    )
+    region = models.ForeignKey(
+        to="dcim.Region",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="devicepool_region_set"
+    )
+    datetimegroup = models.CharField(max_length=200)
+    localroutegroup = models.CharField(max_length=200)
+    cmgroup = models.CharField(max_length=200)
+    objects = RestrictedQuerySet.as_manager()
+
+    csv_headers = ['devicepool', 'tenant', 'description', 'region', 'datetimegroup', 'localroutegroup', 'cmgroup']
+
+    def __str__(self):
+        return str(self.devicepool)
+
+    def get_absolute_url(self):
+        return reverse("plugins:ucbox_plugin:devicepool_view", kwargs={"pk": self.pk})
+
+    class Meta:
+        unique_together = ("devicepool", "tenant",)#ermoe enant here

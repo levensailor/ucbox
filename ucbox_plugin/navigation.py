@@ -11,4 +11,14 @@ menu_items = (
         link_text='Trunks',
         buttons=()
     ),
+    PluginMenuItem(
+        link='plugins:ucbox_plugin:uccluster_list_view',
+        link_text='UC Clusters',
+        buttons=()
+    ),
+    PluginMenuItem(
+        link='plugins:ucbox_plugin:devicepool_list_view',
+        link_text='Device Pools',
+        buttons=()
+    ),
 )

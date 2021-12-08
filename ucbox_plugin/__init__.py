@@ -5,7 +5,7 @@ class UCBoxConfig(PluginConfig):
     name = 'ucbox_plugin'
     verbose_name = 'UCBox Plugin'
     description = 'Unified Communications Management Plugin for NetBox.'
-    version = 'v0.0.1'
+    version = 'v0.0.22'
     author = 'Jeff Levensailor'
     author_email = 'jeff@levensailor.com'
     base_url = 'ucbox'

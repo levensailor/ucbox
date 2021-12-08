@@ -1,15 +1,15 @@
 {% extends 'base/layout.html' %} {% load buttons %} {% load static %} {% load plugins %} {% load helpers %} {% block controls %}
 
 <div class="pull-right noprint">
-    {% if perms.ucbox_plugin.add_number %} {% add_button 'plugins:ucbox_plugin:add_number' %} {% endif %} {% if permissions.add and 'import' in action_buttons %} {% import_button 'plugins:ucbox_plugin:import_numbers' %} {% endif %}
+    {% if perms.ucbox_plugin.add_devicepool %} {% add_button 'plugins:ucbox_plugin:add_devicepool' %} {% endif %} {% if permissions.add and 'import' in action_buttons %} {% import_button 'plugins:ucbox_plugin:import_devicepools' %} {% endif %}
 </div>
 
 {% endblock %} {% block content %}
 
 <ul class="nav nav-tabs px-3">
     <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="numbers-tab" data-bs-toggle="tab" data-bs-target="#numbers" type="button" role="tab" aria-controls="numbers" aria-selected="true">
-		Numbers
+        <button class="nav-link active" id="devicepools-tab" data-bs-toggle="tab" data-bs-target="#devicepools" type="button" role="tab" aria-controls="devicepools" aria-selected="true">
+		Device Pools
 	  </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -21,14 +21,14 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="numbers" role="tabpanel" aria-labelledby="numbers-tab">
+    <div class="tab-pane active" id="devicepools" role="tabpanel" aria-labelledby="devicepools-tab">
 
         {# Applied filters #} {% if filter_form %} {% applied_filters filter_form request.GET %} {% endif %}
 
-        <!-- <h2>{% block title %}Numbers{% endblock %}</h2> -->
+        <!-- <h2>{% block title %}Device Pools{% endblock %}</h2> -->
         <div class="row">
             <div class="col-md-12">
-                {% include 'utilities/obj_table.html' with bulk_delete_url="plugins:ucbox_plugin:number_bulk_delete" bulk_edit_url="plugins:ucbox_plugin:number_bulk_edit" %}
+                {% include 'utilities/obj_table.html' with bulk_delete_url="plugins:ucbox_plugin:devicepool_bulk_delete" bulk_edit_url="plugins:ucbox_plugin:devicepool_bulk_edit" %}
             </div>
         </div>
     </div>

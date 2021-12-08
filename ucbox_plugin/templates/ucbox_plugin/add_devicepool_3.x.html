@@ -1,0 +1,16 @@
+{% extends 'generic/object_edit.html' %} {% load static %} {% load form_helpers %} {% block form %}
+<div class="panel panel-default">
+    <div class="panel-heading"><strong>Device Pool</strong></div>
+    <div class="panel-body">
+    {% render_field form.devicepool %}
+    {% render_field form.tenant %}
+    {% render_field form.region %}
+    {% render_field form.datetimegroup %}
+    {% render_field form.localroutegroup %}
+    {% render_field form.cmgroup %}
+    {% render_field form.description %}
+    {% render_field form.tags %}
+    </div>
+</div>
+
+{% endblock %}
